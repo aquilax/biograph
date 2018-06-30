@@ -8,6 +8,7 @@ type EventType string
 const (
 	Home      EventType = "home"
 	Education EventType = "education"
+	Work      EventType = "work"
 	Travel    EventType = "travel"
 )
 
@@ -62,3 +63,23 @@ func (e *EducationEvent) getFrom() time.Time { return e.from }
 func (e *EducationEvent) getTo() time.Time   { return e.to }
 func (e *EducationEvent) getName() string    { return e.meta.get("school") }
 func (e *EducationEvent) getMeta() *MetaData { return e.meta }
+
+type WorkEvent struct {
+	from time.Time
+	to   time.Time
+	meta *MetaData
+}
+
+func NewWork(employer, position string, from, to time.Time, meta *MetaData) *WorkEvent {
+	if meta == nil {
+		meta = &MetaData{}
+	}
+	meta.merge(&MetaData{"employer": employer, "position": position})
+	return &WorkEvent{from, to, meta}
+}
+
+func (e *WorkEvent) getType() EventType { return Education }
+func (e *WorkEvent) getFrom() time.Time { return e.from }
+func (e *WorkEvent) getTo() time.Time   { return e.to }
+func (e *WorkEvent) getName() string    { return e.meta.get("employer") }
+func (e *WorkEvent) getMeta() *MetaData { return e.meta }
