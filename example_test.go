@@ -19,16 +19,16 @@ func ExampleLife() {
 	l := bio.NewLife(mustDate("1980-01-01"), time.Now())
 	l.Add(
 		bio.NewHome("Example Avenue, My City", "My Country", mustDate("2001-01-01"), mustDate("2010-02-02"), nil),
-		bio.NewEducation("My School", "Bachelor", mustDate("2010-01-01"), mustDate("2015-02-02"), nil),
-		bio.NewWork("My Employer", "Employee", mustDate("2010-01-01"), mustDate("2015-02-02"), nil),
-		bio.NewWork("My Place", "My Country", mustDate("2011-01-01"), mustDate("2013-02-02"), nil),
+		bio.NewEducation("My School", "Bachelor", mustDate("2002-01-01"), mustDate("2015-02-02"), nil),
+		bio.NewWork("My Place", "My Country", mustDate("2004-01-01"), mustDate("2013-02-02"), nil),
+		bio.NewWork("My Employer", "Employee", mustDate("2003-01-01"), mustDate("2015-02-02"), nil),
 	)
 
 	tr := bio.NewTextRenderer(os.Stdout)
 	tr.Render(l)
 	// Output:
 	// 2001-01-01 - 2010-02-02  Example Avenue, My City
-	// 2010-01-01 - 2015-02-02  My School
-	// 2010-01-01 - 2015-02-02  My Employer
-	// 2011-01-01 - 2013-02-02  My Place
+	// 2002-01-01 - 2015-02-02  My School
+	// 2003-01-01 - 2015-02-02  My Employer
+	// 2004-01-01 - 2013-02-02  My Place
 }

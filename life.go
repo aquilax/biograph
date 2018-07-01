@@ -1,6 +1,9 @@
 package biograph
 
-import "time"
+import (
+	"sort"
+	"time"
+)
 
 // LifeEvents handles all life events
 type LifeEvents interface {
@@ -23,8 +26,6 @@ func NewLife(from, to time.Time) *Life {
 
 // Add new event to Life
 func (l *Life) Add(events ...LifeEvent) error {
-	// TODO: check if event has valid time boundaries
-
 	l.events = append(l.events, events...)
 	return nil
 }
@@ -35,5 +36,10 @@ func (l *Life) Count() int {
 }
 
 func (l *Life) Items() []LifeEvent {
+	return l.events
+}
+
+func (l *Life) Asc() []LifeEvent {
+	sort.Slice(l.events, func(i, j int) bool { return l.events[i].getFrom().Before(l.events[j].getFrom()) })
 	return l.events
 }

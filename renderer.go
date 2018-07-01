@@ -22,7 +22,7 @@ func NewTextRenderer(out io.WriteCloser) *TextRenderer {
 }
 
 func (tr *TextRenderer) Render(life *Life) error {
-	for _, event := range life.Items() {
+	for _, event := range life.Asc() {
 		fmt.Fprintf(tr.out, "%s - %s  %s\n", event.getFrom().Format(dateFormat), event.getTo().Format(dateFormat), event.getName())
 	}
 	return nil
