@@ -1,7 +1,6 @@
 package biograph_test
 
 import (
-	"fmt"
 	"time"
 
 	bio "github.com/aquilax/biograph"
@@ -23,6 +22,12 @@ func ExampleLife() {
 		bio.NewWork("My Employer", "Employee", mustDate("2010-01-01"), mustDate("2015-02-02"), nil),
 		bio.NewWork("My Place", "My Country", mustDate("2011-01-01"), mustDate("2013-02-02"), nil),
 	)
-	fmt.Println(l.Count())
-	// Output: 4
+
+	tr := &bio.TextRenderer{}
+	tr.Render(l)
+	// Output:
+	// 2001-01-01 - 2010-02-02  Example Avenue, My City
+	// 2010-01-01 - 2015-02-02  My School
+	// 2010-01-01 - 2015-02-02  My Employer
+	// 2011-01-01 - 2013-02-02  My Place
 }

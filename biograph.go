@@ -5,6 +5,7 @@ import "time"
 // LifeEvents handles all life events
 type LifeEvents interface {
 	Add(event LifeEvent) error
+	Items() []LifeEvent
 	Count() int
 }
 
@@ -31,4 +32,8 @@ func (l *Life) Add(events ...LifeEvent) error {
 // Count returns number of life events
 func (l *Life) Count() int {
 	return len(l.events)
+}
+
+func (l *Life) Items() []LifeEvent {
+	return l.events
 }
