@@ -21,12 +21,14 @@ type LifeEvent interface {
 	getMeta() *MetaData
 }
 
-// HomeEvent represents home address change
-type HomeEvent struct {
+type GenericEvent struct {
 	from time.Time
 	to   time.Time
 	meta *MetaData
 }
+
+// HomeEvent represents home address change
+type HomeEvent GenericEvent
 
 // NewHome creates new Place to live
 func NewHome(address, country string, from, to time.Time, meta *MetaData) *HomeEvent {
@@ -44,11 +46,7 @@ func (e *HomeEvent) getName() string    { return e.meta.get("address") }
 func (e *HomeEvent) getMeta() *MetaData { return e.meta }
 
 // EducationEvent represents studying in educational institution
-type EducationEvent struct {
-	from time.Time
-	to   time.Time
-	meta *MetaData
-}
+type EducationEvent GenericEvent
 
 func NewEducation(school, degree string, from, to time.Time, meta *MetaData) *EducationEvent {
 	if meta == nil {
@@ -64,11 +62,7 @@ func (e *EducationEvent) getTo() time.Time   { return e.to }
 func (e *EducationEvent) getName() string    { return e.meta.get("school") }
 func (e *EducationEvent) getMeta() *MetaData { return e.meta }
 
-type WorkEvent struct {
-	from time.Time
-	to   time.Time
-	meta *MetaData
-}
+type WorkEvent GenericEvent
 
 func NewWork(employer, position string, from, to time.Time, meta *MetaData) *WorkEvent {
 	if meta == nil {
@@ -83,3 +77,19 @@ func (e *WorkEvent) getFrom() time.Time { return e.from }
 func (e *WorkEvent) getTo() time.Time   { return e.to }
 func (e *WorkEvent) getName() string    { return e.meta.get("employer") }
 func (e *WorkEvent) getMeta() *MetaData { return e.meta }
+
+type TravelEvent GenericEvent
+
+func NewTravel(place, country string, from, to time.Time, meta *MetaData) *TravelEvent {
+	if meta == nil {
+		meta = &MetaData{}
+	}
+	meta.merge(&MetaData{"place": place, "country": country})
+	return &TravelEvent{from, to, meta}
+}
+
+func (e *TravelEvent) getType() EventType { return Travel }
+func (e *TravelEvent) getFrom() time.Time { return e.from }
+func (e *TravelEvent) getTo() time.Time   { return e.to }
+func (e *TravelEvent) getName() string    { return e.meta.get("place") + ", " + e.meta.get("country") }
+func (e *TravelEvent) getMeta() *MetaData { return e.meta }

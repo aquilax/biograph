@@ -15,11 +15,14 @@ func mustDate(date string) time.Time {
 	return time
 }
 
-func ExampleBiograph() {
+func ExampleLife() {
 	l := bio.NewLife(mustDate("1980-01-01"), time.Now())
-	l.Add(bio.NewHome("Example Avenue, My City", "My Country", mustDate("2001-01-01"), mustDate("2010-02-02"), nil))
-	l.Add(bio.NewEducation("My School", "Bachelor", mustDate("2010-01-01"), mustDate("2015-02-02"), nil))
-	l.Add(bio.NewWork("My Employer", "Employee", mustDate("2010-01-01"), mustDate("2015-02-02"), nil))
+	l.Add(
+		bio.NewHome("Example Avenue, My City", "My Country", mustDate("2001-01-01"), mustDate("2010-02-02"), nil),
+		bio.NewEducation("My School", "Bachelor", mustDate("2010-01-01"), mustDate("2015-02-02"), nil),
+		bio.NewWork("My Employer", "Employee", mustDate("2010-01-01"), mustDate("2015-02-02"), nil),
+		bio.NewWork("My Place", "My Country", mustDate("2011-01-01"), mustDate("2013-02-02"), nil),
+	)
 	fmt.Println(l.Count())
-	// Output: 3
+	// Output: 4
 }

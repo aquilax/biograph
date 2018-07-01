@@ -21,9 +21,10 @@ func NewLife(from, to time.Time) *Life {
 }
 
 // Add new event to Life
-func (l *Life) Add(event LifeEvent) error {
+func (l *Life) Add(events ...LifeEvent) error {
 	// TODO: check if event has valid time boundaries
-	l.events = append(l.events, event)
+
+	l.events = append(l.events, events...)
 	return nil
 }
 
