@@ -1,6 +1,7 @@
 package biograph_test
 
 import (
+	"os"
 	"time"
 
 	bio "github.com/aquilax/biograph"
@@ -23,7 +24,7 @@ func ExampleLife() {
 		bio.NewWork("My Place", "My Country", mustDate("2011-01-01"), mustDate("2013-02-02"), nil),
 	)
 
-	tr := &bio.TextRenderer{}
+	tr := bio.NewTextRenderer(os.Stdout)
 	tr.Render(l)
 	// Output:
 	// 2001-01-01 - 2010-02-02  Example Avenue, My City
