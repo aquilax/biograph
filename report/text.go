@@ -42,7 +42,7 @@ func getTypeSymbol(et biograph.EventType) string {
 	case biograph.Work:
 		return "👷"
 	case biograph.Travel:
-		return "✈"
+		return "✈️"
 	case biograph.Item:
 		return "📦"
 	}
