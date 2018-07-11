@@ -3,6 +3,7 @@ package report
 import (
 	"fmt"
 	"io"
+	"sort"
 	"strings"
 
 	"github.com/aquilax/biograph"
@@ -53,8 +54,10 @@ func getTypeSymbol(et biograph.EventType) string {
 func renderMeta(m *biograph.MetaData) string {
 	list := make([]string, len(*m))
 	i := 0
-	for key, val := range *m {
-		list[i] = fmt.Sprintf("%s=%s", key, val)
+	keys := m.Keys()
+	sort.StringSlice.Sort(keys)
+	for _, key := range keys {
+		list[i] = fmt.Sprintf("%s=%s", key, m.Get(key))
 		i++
 	}
 	return strings.Join(list, ", ")

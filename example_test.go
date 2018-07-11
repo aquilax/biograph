@@ -30,7 +30,7 @@ func ExampleLife() {
 	tr.Generate(l)
 	// Output:
 	// 2001-01-01 - 2010-02-02 🏠 Example Avenue, My City (address=Example Avenue, My City, country=My Country)
-	// 2002-01-01 - 2015-02-02 🏫 My School (school=My School, degree=Bachelor)
+	// 2002-01-01 - 2015-02-02 🏫 My School (degree=Bachelor, school=My School)
 	// 2003-01-01 - 2015-02-02 👷 My Employer (employer=My Employer, position=Employee)
 	// 2004-01-01 - 2013-02-02 ✈️ My Place, My Country (country=My Country, place=My Place)
 	// 2008-01-01 - 2015-02-02 📦 test/category (brand=Brand, category=test/category)
