@@ -5,6 +5,7 @@ import (
 	"time"
 
 	bio "github.com/aquilax/biograph"
+	"github.com/aquilax/biograph/report"
 )
 
 func mustDate(date string) time.Time {
@@ -24,8 +25,8 @@ func ExampleLife() {
 		bio.NewWork("My Employer", "Employee", mustDate("2003-01-01"), mustDate("2015-02-02"), nil),
 	)
 
-	tr := bio.NewTextRenderer(os.Stdout)
-	tr.Render(l)
+	tr := report.NewText(os.Stdout)
+	tr.Generate(l)
 	// Output:
 	// 2001-01-01 - 2010-02-02  Example Avenue, My City
 	// 2002-01-01 - 2015-02-02  My School

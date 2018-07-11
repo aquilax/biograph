@@ -15,11 +15,11 @@ const (
 
 // LifeEvent is a single life event interface
 type LifeEvent interface {
-	getType() EventType
-	getFrom() time.Time
-	getTo() time.Time
-	getName() string
-	getMeta() *MetaData
+	GetType() EventType
+	GetFrom() time.Time
+	GetTo() time.Time
+	GetName() string
+	GetMeta() *MetaData
 }
 
 type GenericEvent struct {
@@ -40,11 +40,11 @@ func NewHome(address, country string, from, to time.Time, meta *MetaData) *HomeE
 	return &HomeEvent{from, to, meta}
 }
 
-func (e *HomeEvent) getType() EventType { return Home }
-func (e *HomeEvent) getFrom() time.Time { return e.from }
-func (e *HomeEvent) getTo() time.Time   { return e.to }
-func (e *HomeEvent) getName() string    { return e.meta.get("address") }
-func (e *HomeEvent) getMeta() *MetaData { return e.meta }
+func (e *HomeEvent) GetType() EventType { return Home }
+func (e *HomeEvent) GetFrom() time.Time { return e.from }
+func (e *HomeEvent) GetTo() time.Time   { return e.to }
+func (e *HomeEvent) GetName() string    { return e.meta.get("address") }
+func (e *HomeEvent) GetMeta() *MetaData { return e.meta }
 
 // EducationEvent represents studying in educational institution
 type EducationEvent GenericEvent
@@ -57,11 +57,11 @@ func NewEducation(school, degree string, from, to time.Time, meta *MetaData) *Ed
 	return &EducationEvent{from, to, meta}
 }
 
-func (e *EducationEvent) getType() EventType { return Education }
-func (e *EducationEvent) getFrom() time.Time { return e.from }
-func (e *EducationEvent) getTo() time.Time   { return e.to }
-func (e *EducationEvent) getName() string    { return e.meta.get("school") }
-func (e *EducationEvent) getMeta() *MetaData { return e.meta }
+func (e *EducationEvent) GetType() EventType { return Education }
+func (e *EducationEvent) GetFrom() time.Time { return e.from }
+func (e *EducationEvent) GetTo() time.Time   { return e.to }
+func (e *EducationEvent) GetName() string    { return e.meta.get("school") }
+func (e *EducationEvent) GetMeta() *MetaData { return e.meta }
 
 type WorkEvent GenericEvent
 
@@ -73,11 +73,11 @@ func NewWork(employer, position string, from, to time.Time, meta *MetaData) *Wor
 	return &WorkEvent{from, to, meta}
 }
 
-func (e *WorkEvent) getType() EventType { return Education }
-func (e *WorkEvent) getFrom() time.Time { return e.from }
-func (e *WorkEvent) getTo() time.Time   { return e.to }
-func (e *WorkEvent) getName() string    { return e.meta.get("employer") }
-func (e *WorkEvent) getMeta() *MetaData { return e.meta }
+func (e *WorkEvent) GetType() EventType { return Education }
+func (e *WorkEvent) GetFrom() time.Time { return e.from }
+func (e *WorkEvent) GetTo() time.Time   { return e.to }
+func (e *WorkEvent) GetName() string    { return e.meta.get("employer") }
+func (e *WorkEvent) GetMeta() *MetaData { return e.meta }
 
 type TravelEvent GenericEvent
 
@@ -89,11 +89,11 @@ func NewTravel(place, country string, from, to time.Time, meta *MetaData) *Trave
 	return &TravelEvent{from, to, meta}
 }
 
-func (e *TravelEvent) getType() EventType { return Travel }
-func (e *TravelEvent) getFrom() time.Time { return e.from }
-func (e *TravelEvent) getTo() time.Time   { return e.to }
-func (e *TravelEvent) getName() string    { return e.meta.get("place") + ", " + e.meta.get("country") }
-func (e *TravelEvent) getMeta() *MetaData { return e.meta }
+func (e *TravelEvent) GetType() EventType { return Travel }
+func (e *TravelEvent) GetFrom() time.Time { return e.from }
+func (e *TravelEvent) GetTo() time.Time   { return e.to }
+func (e *TravelEvent) GetName() string    { return e.meta.get("place") + ", " + e.meta.get("country") }
+func (e *TravelEvent) GetMeta() *MetaData { return e.meta }
 
 type ItemEvent GenericEvent
 
@@ -105,8 +105,8 @@ func NewItem(category string, from, to time.Time, meta *MetaData) *ItemEvent {
 	return &ItemEvent{from, to, meta}
 }
 
-func (e *ItemEvent) getType() EventType { return Item }
-func (e *ItemEvent) getFrom() time.Time { return e.from }
-func (e *ItemEvent) getTo() time.Time   { return e.to }
-func (e *ItemEvent) getName() string    { return e.meta.get("place") + ", " + e.meta.get("country") }
-func (e *ItemEvent) getMeta() *MetaData { return e.meta }
+func (e *ItemEvent) GetType() EventType { return Item }
+func (e *ItemEvent) GetFrom() time.Time { return e.from }
+func (e *ItemEvent) GetTo() time.Time   { return e.to }
+func (e *ItemEvent) GetName() string    { return e.meta.get("place") + ", " + e.meta.get("country") }
+func (e *ItemEvent) GetMeta() *MetaData { return e.meta }

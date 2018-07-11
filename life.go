@@ -40,6 +40,6 @@ func (l *Life) Items() []LifeEvent {
 }
 
 func (l *Life) Asc() []LifeEvent {
-	sort.Slice(l.events, func(i, j int) bool { return l.events[i].getFrom().Before(l.events[j].getFrom()) })
+	sort.Slice(l.events, func(i, j int) bool { return l.events[i].GetFrom().Before(l.events[j].GetFrom()) })
 	return l.events
 }
