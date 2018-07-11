@@ -73,7 +73,7 @@ func NewWork(employer, position string, from, to time.Time, meta *MetaData) *Wor
 	return &WorkEvent{from, to, meta}
 }
 
-func (e *WorkEvent) GetType() EventType { return Education }
+func (e *WorkEvent) GetType() EventType { return Work }
 func (e *WorkEvent) GetFrom() time.Time { return e.from }
 func (e *WorkEvent) GetTo() time.Time   { return e.to }
 func (e *WorkEvent) GetName() string    { return e.meta.get("employer") }
@@ -108,5 +108,5 @@ func NewItem(category string, from, to time.Time, meta *MetaData) *ItemEvent {
 func (e *ItemEvent) GetType() EventType { return Item }
 func (e *ItemEvent) GetFrom() time.Time { return e.from }
 func (e *ItemEvent) GetTo() time.Time   { return e.to }
-func (e *ItemEvent) GetName() string    { return e.meta.get("place") + ", " + e.meta.get("country") }
+func (e *ItemEvent) GetName() string    { return e.meta.get("category") }
 func (e *ItemEvent) GetMeta() *MetaData { return e.meta }

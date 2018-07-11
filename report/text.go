@@ -29,6 +29,22 @@ func (r *Text) Generate(life *biograph.Life) error {
 }
 
 func (r *Text) printEvent(e biograph.LifeEvent) error {
-	_, err := fmt.Fprintf(r.out, "%s - %s  %s\n", e.GetFrom().Format(dateFormat), e.GetTo().Format(dateFormat), e.GetName())
+	_, err := fmt.Fprintf(r.out, "%s - %s %s %s\n", e.GetFrom().Format(dateFormat), e.GetTo().Format(dateFormat), getTypeSymbol(e.GetType()), e.GetName())
 	return err
+}
+
+func getTypeSymbol(et biograph.EventType) string {
+	switch et {
+	case biograph.Home:
+		return "🏠"
+	case biograph.Education:
+		return "🏫"
+	case biograph.Work:
+		return "👷"
+	case biograph.Travel:
+		return "✈"
+	case biograph.Item:
+		return "📦"
+	}
+	return "?"
 }
