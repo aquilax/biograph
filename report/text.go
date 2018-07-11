@@ -3,6 +3,7 @@ package report
 import (
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/aquilax/biograph"
 )
@@ -29,7 +30,7 @@ func (r *Text) Generate(life *biograph.Life) error {
 }
 
 func (r *Text) printEvent(e biograph.LifeEvent) error {
-	_, err := fmt.Fprintf(r.out, "%s - %s %s %s\n", e.GetFrom().Format(dateFormat), e.GetTo().Format(dateFormat), getTypeSymbol(e.GetType()), e.GetName())
+	_, err := fmt.Fprintf(r.out, "%s - %s %s %s (%s)\n", e.GetFrom().Format(dateFormat), e.GetTo().Format(dateFormat), getTypeSymbol(e.GetType()), e.GetName(), renderMeta(e.GetMeta()))
 	return err
 }
 
@@ -47,4 +48,14 @@ func getTypeSymbol(et biograph.EventType) string {
 		return "📦"
 	}
 	return "?"
+}
+
+func renderMeta(m *biograph.MetaData) string {
+	list := make([]string, len(*m))
+	i := 0
+	for key, val := range *m {
+		list[i] = fmt.Sprintf("%s=%s", key, val)
+		i++
+	}
+	return strings.Join(list, ", ")
 }
