@@ -11,6 +11,7 @@ const (
 	Work      EventType = "work"
 	Travel    EventType = "travel"
 	Item      EventType = "item"
+	Partner   EventType = "partner"
 )
 
 // LifeEvent is a single life event interface
@@ -109,3 +110,18 @@ func NewItem(category string, from, to time.Time, meta *MetaData) *ItemEvent {
 
 func (e *ItemEvent) GetType() EventType { return Item }
 func (e *ItemEvent) GetName() string    { return e.meta.Get("category") }
+
+type PartnerEvent struct {
+	*GenericEvent
+}
+
+func NewPartner(name string, from, to time.Time, meta *MetaData) *PartnerEvent {
+	if meta == nil {
+		meta = &MetaData{}
+	}
+	meta.merge(&MetaData{"name": name})
+	return &PartnerEvent{&GenericEvent{from, to, meta}}
+}
+
+func (e *PartnerEvent) GetType() EventType { return Partner }
+func (e *PartnerEvent) GetName() string    { return e.meta.Get("name") }
