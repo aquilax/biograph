@@ -28,8 +28,14 @@ type GenericEvent struct {
 	meta *MetaData
 }
 
+func (e *GenericEvent) GetFrom() time.Time { return e.from }
+func (e *GenericEvent) GetTo() time.Time   { return e.to }
+func (e *GenericEvent) GetMeta() *MetaData { return e.meta }
+
 // HomeEvent represents home address change
-type HomeEvent GenericEvent
+type HomeEvent struct {
+	*GenericEvent
+}
 
 // NewHome creates new Place to live
 func NewHome(address, country string, from, to time.Time, meta *MetaData) *HomeEvent {
