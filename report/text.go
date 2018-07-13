@@ -21,8 +21,8 @@ func NewText(out io.WriteCloser) *Text {
 }
 
 // Generate generates chronological text report
-func (r *Text) Generate(life *biograph.Life) error {
-	for _, event := range life.Asc() {
+func (r *Text) Generate(events []biograph.LifeEvent) error {
+	for _, event := range events {
 		if err := r.printEvent(event); err != nil {
 			return err
 		}
@@ -49,6 +49,8 @@ func getTypeSymbol(et biograph.EventType) string {
 		return "📦"
 	case biograph.Partner:
 		return "❤️"
+	case biograph.Roommate:
+		return "😃"
 
 	}
 	return "?"
