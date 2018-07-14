@@ -26,6 +26,7 @@ func ExampleLife() {
 		bio.NewItem("test/category", mustDate("2008-01-01"), mustDate("2015-02-02"), &bio.MetaData{"brand": "Brand"}),
 		bio.NewPartner("My Partner", mustDate("2012-01-01"), mustDate("2015-03-02"), nil),
 		bio.NewRoommate("My Roommate", mustDate("2013-01-01"), mustDate("2015-03-02"), nil),
+		bio.NewProject("My Project", mustDate("2014-01-01"), mustDate("2015-03-02"), nil),
 	)
 
 	tr := report.NewText(os.Stdout)
@@ -38,4 +39,5 @@ func ExampleLife() {
 	// 2008-01-01 - 2015-02-02 📦 test/category (brand=Brand, category=test/category)
 	// 2012-01-01 - 2015-03-02 ❤️ My Partner (name=My Partner)
 	// 2013-01-01 - 2015-03-02 😃 My Roommate (name=My Roommate)
+	// 2014-01-01 - 2015-03-02 💡 My Project (name=My Project)
 }
