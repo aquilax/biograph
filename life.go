@@ -10,6 +10,7 @@ type LifeEvents interface {
 	Add(event LifeEvent) error
 	Items() []LifeEvent
 	Count() int
+	Filter(f Filterer) []LifeEvent
 }
 
 // Life handler
@@ -42,4 +43,19 @@ func (l *Life) Items() []LifeEvent {
 func (l *Life) Asc() []LifeEvent {
 	sort.Slice(l.events, func(i, j int) bool { return l.events[i].GetFrom().Before(l.events[j].GetFrom()) })
 	return l.events
+}
+
+func (l *Life) Desc() []LifeEvent {
+	sort.Slice(l.events, func(i, j int) bool { return l.events[j].GetFrom().Before(l.events[i].GetFrom()) })
+	return l.events
+}
+
+func (l *Life) Filter(f Filterer) []LifeEvent {
+	result := make([]LifeEvent, 0)
+	for _, e := range l.events {
+		if f(e) {
+			result = append(result, e)
+		}
+	}
+	return result
 }

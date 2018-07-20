@@ -5,5 +5,5 @@ import (
 )
 
 type Report interface {
-	Generate(l []biograph.LifeEvent) error
+	Generate([]biograph.LifeEvent) error
 }
