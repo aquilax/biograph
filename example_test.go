@@ -17,7 +17,7 @@ func mustDate(date string) time.Time {
 }
 
 func ExampleLife() {
-	l := bio.NewLife(mustDate("1980-01-01"), time.Now())
+	l := bio.NewLifeArray(mustDate("1980-01-01"), time.Now())
 	l.Add(
 		bio.NewHome("Example Avenue, My City", "My Country", mustDate("2001-01-01"), mustDate("2010-02-02"), nil),
 		bio.NewEducation("My School", "Bachelor", mustDate("2002-01-01"), mustDate("2015-02-02"), nil),
