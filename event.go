@@ -27,7 +27,7 @@ type LifeEvents interface {
 type Events []LifeEvent
 
 func (le Events) Sort(c CompGenerator) Events {
-	sort.Slice(le, c(le))
+	sort.SliceStable(le, c(le))
 	return le
 }
 
