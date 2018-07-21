@@ -1,6 +1,9 @@
 package biograph
 
-import "time"
+import (
+	"sort"
+	"time"
+)
 
 // EventType contains the type of the event
 type EventType string
@@ -15,6 +18,28 @@ const (
 	Roommate  EventType = "roommate"
 	Project   EventType = "project"
 )
+
+type LifeEvents interface {
+	Sort(CompGenerator) Events
+	Filter(f Filterer) Events
+}
+
+type Events []LifeEvent
+
+func (le Events) Sort(c CompGenerator) Events {
+	sort.Slice(le, c(le))
+	return le
+}
+
+func (le Events) Filter(f Filterer) Events {
+	result := make([]LifeEvent, 0)
+	for _, e := range le {
+		if f(e) {
+			result = append(result, e)
+		}
+	}
+	return result
+}
 
 // LifeEvent is a single life event interface
 type LifeEvent interface {

@@ -30,14 +30,14 @@ func ExampleLife() {
 	)
 
 	tr := report.NewText(os.Stdout)
-	tr.Generate(l.Items())
+	tr.Generate(l.Items().Sort(bio.Desc))
 	// Output:
-	// 2001-01-01 - 2010-02-02 🏠 Example Avenue, My City (address=Example Avenue, My City, country=My Country)
-	// 2002-01-01 - 2015-02-02 🏫 My School (degree=Bachelor, school=My School)
-	// 2003-01-01 - 2015-02-02 👷 My Employer (employer=My Employer, position=Employee)
-	// 2004-01-01 - 2013-02-02 ✈️ My Place, My Country (country=My Country, place=My Place)
-	// 2008-01-01 - 2015-02-02 📦 test/category (brand=Brand, category=test/category)
-	// 2012-01-01 - 2015-03-02 ❤️ My Partner (name=My Partner)
-	// 2013-01-01 - 2015-03-02 😃 My Roommate (name=My Roommate)
 	// 2014-01-01 - 2015-03-02 💡 My Project (name=My Project)
+	// 2013-01-01 - 2015-03-02 😃 My Roommate (name=My Roommate)
+	// 2012-01-01 - 2015-03-02 ❤️ My Partner (name=My Partner)
+	// 2008-01-01 - 2015-02-02 📦 test/category (brand=Brand, category=test/category)
+	// 2004-01-01 - 2013-02-02 ✈️ My Place, My Country (country=My Country, place=My Place)
+	// 2003-01-01 - 2015-02-02 👷 My Employer (employer=My Employer, position=Employee)
+	// 2002-01-01 - 2015-02-02 🏫 My School (degree=Bachelor, school=My School)
+	// 2001-01-01 - 2010-02-02 🏠 Example Avenue, My City (address=Example Avenue, My City, country=My Country)
 }

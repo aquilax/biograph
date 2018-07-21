@@ -1,61 +1,40 @@
 package biograph
 
 import (
-	"sort"
 	"time"
 )
 
 // LifeEvents handles all life events
-type LifeEvents interface {
+type Life interface {
 	Add(event LifeEvent) error
-	Items() []LifeEvent
+	Items() Events
 	Count() int
-	Filter(f Filterer) []LifeEvent
 }
 
 // Life handler
-type Life struct {
+type LifeArray struct {
 	from   time.Time
 	to     time.Time
-	events []LifeEvent
+	events Events
 }
 
 // NewLife creates new Life handler
-func NewLife(from, to time.Time) *Life {
-	return &Life{from, to, []LifeEvent{}}
+func NewLife(from, to time.Time) *LifeArray {
+	return &LifeArray{from, to, []LifeEvent{}}
 }
 
 // Add new event to Life
-func (l *Life) Add(events ...LifeEvent) error {
+func (l *LifeArray) Add(events ...LifeEvent) error {
 	l.events = append(l.events, events...)
 	return nil
 }
 
 // Count returns number of life events
-func (l *Life) Count() int {
+func (l *LifeArray) Count() int {
 	return len(l.events)
 }
 
-func (l *Life) Items() []LifeEvent {
+// Items return all Events as an array
+func (l *LifeArray) Items() Events {
 	return l.events
-}
-
-func (l *Life) Asc() []LifeEvent {
-	sort.Slice(l.events, func(i, j int) bool { return l.events[i].GetFrom().Before(l.events[j].GetFrom()) })
-	return l.events
-}
-
-func (l *Life) Desc() []LifeEvent {
-	sort.Slice(l.events, func(i, j int) bool { return l.events[j].GetFrom().Before(l.events[i].GetFrom()) })
-	return l.events
-}
-
-func (l *Life) Filter(f Filterer) []LifeEvent {
-	result := make([]LifeEvent, 0)
-	for _, e := range l.events {
-		if f(e) {
-			result = append(result, e)
-		}
-	}
-	return result
 }
