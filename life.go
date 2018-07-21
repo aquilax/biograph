@@ -19,7 +19,7 @@ type LifeArray struct {
 }
 
 // NewLife creates new Life handler
-func NewLife(from, to time.Time) *LifeArray {
+func NewLifeArray(from, to time.Time) *LifeArray {
 	return &LifeArray{from, to, []LifeEvent{}}
 }
 
