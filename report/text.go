@@ -21,7 +21,7 @@ func NewText(out io.WriteCloser) *Text {
 }
 
 // Generate generates chronological text report
-func (r *Text) Generate(events []biograph.LifeEvent) error {
+func (r *Text) Generate(events biograph.Events) error {
 	for _, event := range events {
 		if err := r.printEvent(event); err != nil {
 			return err

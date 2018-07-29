@@ -30,7 +30,7 @@ func ExampleLife() {
 	)
 
 	tr := report.NewText(os.Stdout)
-	tr.Generate(l.Items().Sort(bio.Desc))
+	tr.Generate(l.Items().Sort(bio.DescFrom))
 	// Output:
 	// 2014-01-01 - 2015-03-02 💡 My Project (name=My Project)
 	// 2013-01-01 - 2015-03-02 😃 My Roommate (name=My Roommate)
