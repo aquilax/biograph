@@ -53,6 +53,8 @@ func getTypeSymbol(et biograph.EventType) string {
 		return "😃"
 	case biograph.Project:
 		return "💡"
+	case biograph.Document:
+		return "🗎"
 	}
 	return "?"
 }
