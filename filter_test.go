@@ -14,6 +14,8 @@ func d(date string) time.Time {
 }
 
 func TestNewBetween(t *testing.T) {
+	now := time.Now()
+	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, now.Location())
 	type args struct {
 		from  time.Time
 		to    time.Time
@@ -48,6 +50,24 @@ func TestNewBetween(t *testing.T) {
 				d("2017-02-01"),
 				d("2017-02-01"),
 				NewItem("test", d("2017-01-01"), d("2017-03-01"), nil),
+			},
+			true,
+		},
+		{
+			"If event is within the interval returns true",
+			args{
+				d("2017-01-02"),
+				d("2017-01-02"),
+				NewItem("test", d("2017-01-01"), d("2017-01-03"), nil),
+			},
+			true,
+		},
+		{
+			"Return today's item if it happened today",
+			args{
+				today,
+				today,
+				NewItem("test", today, today, nil),
 			},
 			true,
 		},

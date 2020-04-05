@@ -17,6 +17,8 @@ const (
 	Partner   EventType = "partner"
 	Roommate  EventType = "roommate"
 	Project   EventType = "project"
+	Document  EventType = "document"
+	Process   EventType = "process"
 )
 
 type LifeEvents interface {
@@ -182,3 +184,33 @@ func NewProject(name string, from, to time.Time, meta *MetaData) *ProjectEvent {
 
 func (e *ProjectEvent) GetType() EventType { return Project }
 func (e *ProjectEvent) GetName() string    { return e.meta.Get("name") }
+
+type DocumentEvent struct {
+	*GenericEvent
+}
+
+func NewDocument(name string, from, to time.Time, meta *MetaData) *DocumentEvent {
+	if meta == nil {
+		meta = &MetaData{}
+	}
+	meta.merge(&MetaData{"name": name})
+	return &DocumentEvent{&GenericEvent{from, to, meta}}
+}
+
+func (e *DocumentEvent) GetType() EventType { return Document }
+func (e *DocumentEvent) GetName() string    { return e.meta.Get("name") }
+
+type ProcessEvent struct {
+	*GenericEvent
+}
+
+func NewProcess(name string, from, to time.Time, meta *MetaData) *ProcessEvent {
+	if meta == nil {
+		meta = &MetaData{}
+	}
+	meta.merge(&MetaData{"name": name})
+	return &ProcessEvent{&GenericEvent{from, to, meta}}
+}
+
+func (e *ProcessEvent) GetType() EventType { return Process }
+func (e *ProcessEvent) GetName() string    { return e.meta.Get("name") }
