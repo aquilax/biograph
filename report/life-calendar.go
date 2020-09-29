@@ -1,7 +1,6 @@
 package report
 
 import (
-	"bytes"
 	"encoding/json"
 	"io"
 
@@ -11,14 +10,14 @@ import (
 const layoutISO = "2006-01-02"
 
 type event struct {
-	Type  int
-	Date  string
-	Title string
+	Type  int    `json:"type"`
+	Date  string `json:"date"`
+	Title string `json:"title"`
 }
 
 type lifeCalendar struct {
-	Options map[string]string
-	Events  []event
+	Options map[string]string `json:"options"`
+	Events  []event           `json:"events"`
 }
 
 func toInt(e biograph.EventType) int {
@@ -48,11 +47,11 @@ func toInt(e biograph.EventType) int {
 }
 
 type LifeCalendar struct {
-	out io.WriteCloser
+	out io.Writer
 }
 
 // NewLifeCalendar creates new report
-func NewLifeCalendar(out io.WriteCloser) *LifeCalendar {
+func NewLifeCalendar(out io.Writer) *LifeCalendar {
 	return &LifeCalendar{out}
 }
 
@@ -72,8 +71,6 @@ func (l *LifeCalendar) Generate(events biograph.Events) error {
 	if err != nil {
 		return err
 	}
-	var b bytes.Buffer
-	b.Write(bt)
-	_, err = b.WriteTo(l.out)
+	_, err = l.out.Write(bt)
 	return err
 }
