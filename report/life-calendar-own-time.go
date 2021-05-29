@@ -3,6 +3,7 @@ package report
 import (
 	"fmt"
 	"io"
+	"strings"
 	"time"
 
 	"github.com/aquilax/biograph"
@@ -22,6 +23,8 @@ func (l *LifeCalendarOwnTime) Generate(events biograph.Events) error {
 	fromYear := 0
 	toYear := int(l.endDate.Sub(l.startDate).Hours()/(24*7*52)) + 1
 	buckets := getWeekBucketsOwnTime(l.startDate, events)
+
+	fmt.Fprintf(l.output, "    %s\n", getWeeksHeader(" "))
 
 	for year := fromYear; year < toYear; year++ {
 		totalWeeks := 52
@@ -53,4 +56,12 @@ func getWeekBucketsOwnTime(startDate time.Time, events biograph.Events) map[stri
 		buckets[key] += 1
 	}
 	return buckets
+}
+
+func getWeeksHeader(separator string) string {
+	weeks := make([]string, 52)
+	for i := 0; i < 52; i++ {
+		weeks[i] = fmt.Sprintf("%02d", i+1)
+	}
+	return strings.Join(weeks, separator)
 }
