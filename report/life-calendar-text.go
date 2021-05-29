@@ -32,12 +32,11 @@ func (l *LifeCalendarText) Generate(events biograph.Events) error {
 			if count, ok := buckets[key]; ok {
 				fmt.Fprintf(l.output, "%02d", count)
 			} else {
-				fmt.Fprintf(l.output, "%02d", 0)
+				fmt.Fprint(l.output, "--")
 			}
 			if week < totalWeeks {
 				l.output.Write([]byte{' '})
 			}
-			//fmt.Fprintf(l.output, "%02d ", week)
 		}
 		fmt.Fprintln(l.output, "")
 	}

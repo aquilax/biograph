@@ -4,11 +4,13 @@ import (
 	"time"
 )
 
-// LifeEvents handles all life events
+// Life handles all life events
 type Life interface {
 	Add(event LifeEvent) error
 	Items() Events
 	Count() int
+	From() time.Time
+	To() time.Time
 }
 
 // Life handler
@@ -37,4 +39,14 @@ func (l *LifeArray) Count() int {
 // Items return all Events as an array
 func (l *LifeArray) Items() Events {
 	return l.events
+}
+
+// From returns the starting date
+func (l *LifeArray) From() time.Time {
+	return l.from
+}
+
+// To returns the end date
+func (l *LifeArray) To() time.Time {
+	return l.to
 }
