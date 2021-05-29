@@ -25,7 +25,7 @@ func (l *LifeCalendarOwnTime) Generate(events biograph.Events) error {
 
 	for year := fromYear; year < toYear; year++ {
 		totalWeeks := 52
-		fmt.Fprintf(l.output, "% 3d  ", year+1)
+		fmt.Fprintf(l.output, "% 3d  ", year)
 		for week := 0; week < totalWeeks; week++ {
 			key := bucketKey(year, week)
 			if count, ok := buckets[key]; ok {
