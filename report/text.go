@@ -5,6 +5,7 @@ import (
 	"io"
 	"sort"
 	"strings"
+	"time"
 
 	"github.com/aquilax/biograph"
 )
@@ -12,11 +13,11 @@ import (
 const dateFormat = "2006-01-02"
 
 type Text struct {
-	out io.WriteCloser
+	out io.Writer
 }
 
 // NewText creates new text reporter
-func NewText(out io.WriteCloser) *Text {
+func NewText(out io.Writer) *Text {
 	return &Text{out}
 }
 
@@ -30,8 +31,15 @@ func (r *Text) Generate(events biograph.Events) error {
 	return nil
 }
 
+func formatTime(t time.Time) string {
+	if t.IsZero() {
+		return "----------"
+	}
+	return t.Format(dateFormat)
+}
+
 func (r *Text) printEvent(e biograph.LifeEvent) error {
-	_, err := fmt.Fprintf(r.out, "%s - %s %s %s (%s)\n", e.GetFrom().Format(dateFormat), e.GetTo().Format(dateFormat), getTypeSymbol(e.GetType()), e.GetName(), renderMeta(e.GetMeta()))
+	_, err := fmt.Fprintf(r.out, "%s - %s %s %s (%s)\n", formatTime(e.GetFrom()), formatTime(e.GetTo()), getTypeSymbol(e.GetType()), e.GetName(), renderMeta(e.GetMeta()))
 	return err
 }
 

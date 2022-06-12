@@ -16,7 +16,7 @@ func mustDate(date string) time.Time {
 	return time
 }
 
-func ExampleLife() {
+func getSampleLife() *bio.LifeArray {
 	l := bio.NewLifeArray(mustDate("1980-01-01"), time.Now())
 	l.Add(
 		bio.NewHome("Example Avenue, My City", "My Country", mustDate("2001-01-01"), mustDate("2010-02-02"), nil),
@@ -27,13 +27,19 @@ func ExampleLife() {
 		bio.NewPartner("My Partner", mustDate("2012-01-01"), mustDate("2015-03-02"), nil),
 		bio.NewRoommate("My Roommate", mustDate("2013-01-01"), mustDate("2015-03-02"), nil),
 		bio.NewProject("My Project", mustDate("2014-01-01"), mustDate("2015-03-02"), nil),
-		bio.NewDocument("My Document", mustDate("2015-01-01"), mustDate("2016-03-02"), nil),
+		bio.NewDocument("My Document", mustDate("2015-01-01"), never, nil),
 	)
+	return l
+}
 
+var never = time.Time{}
+
+func ExampleLife() {
+	l := getSampleLife()
 	tr := report.NewText(os.Stdout)
 	tr.Generate(l.Items().Sort(bio.DescFrom))
 	// Output:
-	// 2015-01-01 - 2016-03-02 🗎 My Document (name=My Document)
+	// 2015-01-01 - ---------- 🗎 My Document (name=My Document)
 	// 2014-01-01 - 2015-03-02 💡 My Project (name=My Project)
 	// 2013-01-01 - 2015-03-02 😃 My Roommate (name=My Roommate)
 	// 2012-01-01 - 2015-03-02 ❤️ My Partner (name=My Partner)
