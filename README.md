@@ -1,5 +1,3 @@
-# biograph
-
-[![Build Status](https://travis-ci.org/aquilax/biograph.svg?branch=master)](https://travis-ci.org/aquilax/biograph)
+# biograph [![Go Reference](https://pkg.go.dev/badge/github.com/aquilax/biograph.svg)](https://pkg.go.dev/github.com/aquilax/biograph)
 
 Life graphing library
