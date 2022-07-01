@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"io"
 	"testing"
+	"time"
 
 	"github.com/aquilax/biograph"
 )
@@ -20,11 +21,11 @@ func TestMarkWhen_Generate(t *testing.T) {
 			biograph.Events{
 				biograph.NewHome("City", "Country", d("2000-02-01"), d("2022-01-01"), nil),
 				biograph.NewHome("City", "Country", d("2000-02-02"), d("2022-01-01"), nil),
-				biograph.NewHome("City", "Country", d("2000-03-02"), d("2022-01-01"), nil),
+				biograph.NewHome("City", "Country", d("2000-03-02"), time.Time{}, nil),
 			},
-			`2000-02-01 - 2022-01-01: City #home
-2000-02-02 - 2022-01-01: City #home
-2000-03-02 - 2022-01-01: City #home
+			`2000-02-01 / 2022-01-01: City #home
+2000-02-02 / 2022-01-01: City #home
+2000-03-02 / now: City #home
 `,
 			false,
 		},

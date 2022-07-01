@@ -35,7 +35,7 @@ func formatMarkWhenTime(t time.Time) string {
 }
 
 func (mw MarkWhen) printEvent(e biograph.LifeEvent) error {
-	if _, err := fmt.Fprintf(mw.out, "%s - %s: %s #%s\n", formatMarkWhenTime(e.GetFrom()), formatMarkWhenTime(e.GetTo()), e.GetName(), e.GetType()); err != nil {
+	if _, err := fmt.Fprintf(mw.out, "%s / %s: %s #%s\n", formatMarkWhenTime(e.GetFrom()), formatMarkWhenTime(e.GetTo()), e.GetName(), e.GetType()); err != nil {
 		return err
 	}
 	return nil
