@@ -16,9 +16,8 @@ func NewMarkWhen(out io.Writer) *MarkWhen {
 	return &MarkWhen{out}
 }
 
-// Generate generates Markwhen compatible fact export
+// Generate generates MarkWhen compatible fact export
 func (mw MarkWhen) Generate(events biograph.Events) error {
-	// fmt.Fprintln(mw.out, "dateFormat: y-M-d")
 	for _, event := range events {
 		if err := mw.printEvent(event); err != nil {
 			return err
