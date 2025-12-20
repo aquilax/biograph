@@ -49,3 +49,18 @@ func ExampleLife() {
 	// 2002-01-01 - 2015-02-02 🏫 My School (degree=Bachelor, school=My School)
 	// 2001-01-01 - 2010-02-02 🏠 Example Avenue, My City (address=Example Avenue, My City, country=My Country)
 }
+
+func ExampleBranches() {
+	l := getSampleLife()
+	rep := report.NewBranches(mustDate("2000-01-01"), mustDate("2020-12-31"), os.Stdout)
+	rep.Generate(l.Items().Sort(bio.DescFrom))
+	// Output:
+	// 2000-01-01
+	// 2001-01-01 ├─🏠 Example Avenue, My City (address=Example Avenue, My City, country=My Country)
+	// 2002-01-01 │ ├─🏫 My School (degree=Bachelor, school=My School)
+	// 2003-01-01 │ │ ├─👷 My Employer (employer=My Employer, position=Employee)
+	// 2004-01-01 │ │ │ ├─✈️ My Place, My Country (country=My Country, place=My Place)
+	// 2008-01-01 │ │ │ │ ├─📦 test/category (brand=Brand, category=test/category)
+	// 2010-02-02 │ │ │ │ M
+	// 2012-01-01 │ │ │   ├─❤️ My Partner (name=	My Partner)
+}
